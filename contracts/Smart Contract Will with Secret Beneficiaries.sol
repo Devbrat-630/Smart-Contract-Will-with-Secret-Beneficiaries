@@ -11,6 +11,7 @@ contract SmartContractWill {
     event WillUpdated(bytes encryptedData);
     event DeceasedDeclared();
     event InheritanceClaimed(address beneficiary, uint amount);
+    event OwnershipTransferred(address indexed oldOwner, address indexed newOwner);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not owner");
@@ -39,19 +40,25 @@ contract SmartContractWill {
         emit DeceasedDeclared();
     }
 
+    // ✅ New Function: Change owner of the will
+    function changeOwner(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "Invalid new owner");
+        emit OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
+    }
+
     // Owner funds the will contract with inheritance amount
     receive() external payable {}
 
     // Beneficiary claims their share by providing proof off-chain
-    // (In practice, this function would be more complex with verification)
     function claimInheritance(address payable beneficiary, uint amount) external onlyIfDeceased {
         require(address(this).balance >= amount, "Insufficient funds");
         beneficiary.transfer(amount);
         emit InheritanceClaimed(beneficiary, amount);
     }
 
+    // Returns encrypted beneficiaries info
     function getEncryptedBeneficiaries() external view returns (bytes memory) {
         return encryptedBeneficiaries;
     }
 }
-
