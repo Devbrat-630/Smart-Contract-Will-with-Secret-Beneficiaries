@@ -25,4 +25,6 @@ To provide a transparent yet privacy-respecting way to handle digital wills usin
 
 - Contracts Address:0xcC9D80117a895Df7486007E2668c805fBe8e3700
 - <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1fc7949a-0803-48df-a43e-13c59415bef5" />
+ Project reviewed and updated by Devbrat on 31-Aug-2025.
+
 
