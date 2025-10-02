@@ -22,7 +22,7 @@ contract SmartContractWill {
         require(isDeceased, "Owner is not deceased yet");
         _;
     }
-
+    // ✅ Minor update to keep the project active - 02 Oct 2025
     constructor() {
         owner = msg.sender;
         isDeceased = false;
